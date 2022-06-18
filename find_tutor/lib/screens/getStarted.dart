@@ -1,3 +1,4 @@
+import 'package:find_tutor/screens/tutor/loginSignUp.dart';
 import 'package:flutter/material.dart';
 
 class getStarted extends StatelessWidget {
@@ -48,10 +49,15 @@ class getStarted extends StatelessWidget {
 
               //Tutor Button
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => tutorLoginSignUP())));
+                },
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w600),
+                      fontSize: 20, fontWeight: FontWeight.w500),
                   // ignore: prefer_const_constructors
                   fixedSize: Size(300, 60),
                   shape: RoundedRectangleBorder(
@@ -75,7 +81,7 @@ class getStarted extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     textStyle:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
                 child: const Text("Student"),
               ),
             ],
