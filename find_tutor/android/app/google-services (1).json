@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "684260924459",
+    "project_id": "findtutor-c168a",
+    "storage_bucket": "findtutor-c168a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684260924459:android:0ff009fea834d882f55e6e",
+        "android_client_info": {
+          "package_name": "com.example.find_tutor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684260924459-gpa94p14r6raeip5ls4tllubkurnvq24.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.find_tutor",
+            "certificate_hash": "045b8654b321933b0faf1218eab689b487190d7a"
+          }
+        },
+        {
+          "client_id": "684260924459-hmlh8udashutu310r0nhkfk0rhmt05bv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDttThN68u9mazsE9oTRBdXycU8fTebMF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684260924459-hmlh8udashutu310r0nhkfk0rhmt05bv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
