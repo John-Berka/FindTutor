@@ -1,6 +1,4 @@
-import 'package:find_tutor/screens/getStarted.dart';
 import 'package:find_tutor/screens/splashScreen.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class tutorLoginSignUP extends StatefulWidget {
   const tutorLoginSignUP({Key? key}) : super(key: key);
@@ -10,6 +8,11 @@ class tutorLoginSignUP extends StatefulWidget {
 }
 
 class _tutorLoginSignUPState extends State<tutorLoginSignUP> {
+  //Create necessary form attributes
+  // ignore: unused_field
+  final _formKey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +21,7 @@ class _tutorLoginSignUPState extends State<tutorLoginSignUP> {
         backgroundColor: Color(0xff8884FF),
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 50),
+        padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
         // Wrapping evercomponent in a column
         child: Center(
           child: Column(
@@ -32,8 +35,25 @@ class _tutorLoginSignUPState extends State<tutorLoginSignUP> {
                 height: 250,
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 30,
+              ),
+
+              //Creating Login form
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          labelText: "Password",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                    )
+                  ],
+                ),
               )
             ],
           ),
