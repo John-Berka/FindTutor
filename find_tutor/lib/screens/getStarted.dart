@@ -1,4 +1,4 @@
-import 'package:find_tutor/screens/tutor/loginSignUp.dart';
+import 'package:find_tutor/screens/tutor/tutorLoginScreen.dart';
 import 'package:flutter/material.dart';
 
 class getStarted extends StatelessWidget {
@@ -50,10 +50,8 @@ class getStarted extends StatelessWidget {
               //Tutor Button
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => tutorLoginSignUP())));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => tutorLogin())));
                 },
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
