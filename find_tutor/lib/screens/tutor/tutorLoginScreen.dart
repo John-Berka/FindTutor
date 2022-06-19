@@ -56,7 +56,7 @@ class _tutorLoginState extends State<tutorLogin> {
                     children: [
                       //Email Field
                       TextFormField(
-                        controller: tutorLoginPassword,
+                        controller: tutorLoginEmail,
                         keyboardType: TextInputType.emailAddress,
                         obscureText: false,
                         autofillHints: [AutofillHints.email],
@@ -66,11 +66,12 @@ class _tutorLoginState extends State<tutorLogin> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
                             )),
-                        validator: (email) {
-                          if (email!.isEmpty) {
-                            return "Enter a valid email";
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Email";
                           }
-                          if (EmailValidator.validate(email)) {
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value)) {
                             return "Please enter a valid email";
                           }
                           return null;
@@ -89,11 +90,11 @@ class _tutorLoginState extends State<tutorLogin> {
                         validator: (value) {
                           RegExp regex = new RegExp(r'^.{6,}');
                           if (value!.isEmpty) {
-                            return "Password Enter  your Password";
+                            return "Please Enter your Password";
                           }
 
-                          if (regex.hasMatch(value)) {
-                            return ("Please Enter Valid Password(Min. 6 Characters");
+                          if (!regex.hasMatch(value)) {
+                            return ("Enter Valid Password(Min. 6 Characters");
                           }
 
                           return null;
