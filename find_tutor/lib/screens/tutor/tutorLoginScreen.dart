@@ -1,6 +1,9 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:find_tutor/screens/tutor/tutorProfileScreen.dart';
 import 'package:find_tutor/screens/tutor/tutorSignupScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class tutorLogin extends StatefulWidget {
   const tutorLogin({Key? key}) : super(key: key);
@@ -12,15 +15,17 @@ class tutorLogin extends StatefulWidget {
 class _tutorLoginState extends State<tutorLogin> {
   //Create necessary form attributes
   // ignore: unused_field
-  final _formKey = GlobalKey<FormState>();
-  final tutorLoginEmail = TextEditingController();
-  final tutorLoginPassword = TextEditingController();
+  final _formKey = new GlobalKey<FormState>();
+  final TextEditingController tutorLoginEmail = new TextEditingController();
+  final TextEditingController tutorLoginPassword = new TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Center(child: Text("Borize")), 
+        // title: Center(child: Text("Borize")),
         foregroundColor: Colors.white,
         backgroundColor: Color(0xff8884FF),
       ),
@@ -62,9 +67,13 @@ class _tutorLoginState extends State<tutorLogin> {
                               borderRadius: BorderRadius.circular(30),
                             )),
                         validator: (email) {
-                          if (email == null || EmailValidator.validate(email)) {
+                          if (email!.isEmpty) {
                             return "Enter a valid email";
                           }
+                          if (EmailValidator.validate(email)) {
+                            return "Please enter a valid email";
+                          }
+                          return null;
                         },
                       ),
 
@@ -78,9 +87,16 @@ class _tutorLoginState extends State<tutorLogin> {
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Password is required";
+                          RegExp regex = new RegExp(r'^.{6,}');
+                          if (value!.isEmpty) {
+                            return "Password Enter  your Password";
                           }
+
+                          if (regex.hasMatch(value)) {
+                            return ("Please Enter Valid Password(Min. 6 Characters");
+                          }
+
+                          return null;
                         },
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -96,7 +112,9 @@ class _tutorLoginState extends State<tutorLogin> {
 
                       //Creating submit button
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          signIn(tutorLoginEmail.text, tutorLoginPassword.text);
+                        },
                         child: Text(
                           "Login",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -144,5 +162,21 @@ class _tutorLoginState extends State<tutorLogin> {
         ),
       ),
     );
+  }
+
+  //login function
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Sucessful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => tutorProfile()))
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
   }
 }
