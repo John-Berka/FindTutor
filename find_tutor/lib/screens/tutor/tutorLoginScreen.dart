@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:find_tutor/screens/tutor/tutorSignupScreen.dart';
 import 'package:flutter/material.dart';
 
 class tutorLogin extends StatefulWidget {
@@ -12,8 +13,8 @@ class _tutorLoginState extends State<tutorLogin> {
   //Create necessary form attributes
   // ignore: unused_field
   final _formKey = GlobalKey<FormState>();
-  String email = "";
-  String password = "";
+  final tutorLoginEmail = TextEditingController();
+  final tutorLoginPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,7 @@ class _tutorLoginState extends State<tutorLogin> {
                     children: [
                       //Email Field
                       TextFormField(
+                        controller: tutorLoginPassword,
                         keyboardType: TextInputType.emailAddress,
                         obscureText: false,
                         autofillHints: [AutofillHints.email],
@@ -71,6 +73,7 @@ class _tutorLoginState extends State<tutorLogin> {
 
                       //Password Feild
                       TextFormField(
+                        controller: tutorLoginPassword,
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         validator: (value) {
@@ -115,7 +118,12 @@ class _tutorLoginState extends State<tutorLogin> {
                         children: <Widget>[
                           Text("Don't have an account?"),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) => tutorSignup())));
+                            },
                             child: Text(
                               "Signup",
                               style: TextStyle(color: Color(0xff8884FF)),
