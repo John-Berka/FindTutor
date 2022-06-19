@@ -20,6 +20,7 @@ class _tutorLoginState extends State<tutorLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // title: Center(child: Text("Login")),
         foregroundColor: Colors.white,
         backgroundColor: Color(0xff8884FF),
       ),
