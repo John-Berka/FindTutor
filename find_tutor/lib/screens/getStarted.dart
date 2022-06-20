@@ -1,3 +1,4 @@
+import 'package:find_tutor/screens/student/studentLoginScreen.dart';
 import 'package:find_tutor/screens/tutor/tutorLoginScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,12 @@ class getStarted extends StatelessWidget {
               //Student Button
               // ignore: prefer_const_constructors
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => studentLogin())));
+                },
                 style: ElevatedButton.styleFrom(
                     primary: Colors.black,
                     fixedSize: Size(300, 60),

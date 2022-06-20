@@ -3,6 +3,9 @@ import 'package:find_tutor/screens/tutor/tutorLoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class tutorSignup extends StatefulWidget {
   const tutorSignup({Key? key}) : super(key: key);
@@ -59,6 +62,17 @@ class _tutorSignupState extends State<tutorSignup> {
                         controller: tutorFirstName,
                         obscureText: false,
                         keyboardType: TextInputType.text,
+                        validator: (value) {
+                          RegExp regex = new RegExp(r'^.{3,}$');
+                          if (value!.isEmpty) {
+                            return ("First Name cannot be Empty");
+                          }
+                          if (!regex.hasMatch(value)) {
+                            return "Enter Valid name(Min, 3 characters)";
+                          }
+
+                          return null;
+                        },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
                           labelText: "First Name",
@@ -77,6 +91,12 @@ class _tutorSignupState extends State<tutorSignup> {
                         controller: tutorLastName,
                         obscureText: false,
                         keyboardType: TextInputType.text,
+                        validator: (value) {
+                          RegExp regex = new RegExp(r'^.{3,}$');
+                          if (value!.isEmpty) {
+                            return ("Last Name cannot be Empty");
+                          }
+                        },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
                           labelText: "Last Name",
@@ -100,10 +120,15 @@ class _tutorSignupState extends State<tutorSignup> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
                             )),
-                        validator: (email) {
-                          if (email == null || EmailValidator.validate(email)) {
-                            return "Enter a valid email";
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Your Email";
                           }
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value)) {
+                            return "Please enter a valid email";
+                          }
+                          return null;
                         },
                       ),
 
@@ -135,9 +160,16 @@ class _tutorSignupState extends State<tutorSignup> {
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Password is required";
+                          RegExp regex = new RegExp(r'^.{6,}');
+                          if (value!.isEmpty) {
+                            return "Please Enter your Password";
                           }
+
+                          if (!regex.hasMatch(value)) {
+                            return ("Enter Valid Password(Min. 6 Characters");
+                          }
+
+                          return null;
                         },
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -158,9 +190,11 @@ class _tutorSignupState extends State<tutorSignup> {
                         keyboardType: TextInputType.text,
                         obscureText: true,
                         validator: (value) {
-                          if (tutorConfirmPassword != tutorPassword) {
+                          if (tutorConfirmPassword.text.length > 6 &&
+                              tutorPassword.text != value) {
                             return "Passwords don't match";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
@@ -225,4 +259,17 @@ class _tutorSignupState extends State<tutorSignup> {
       )),
     );
   }
+
+  void signUp(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      // await _auth.createUserWithEmailAndPassword(email: email, password: password)
+      //   .then((value) => {
+      //     postDetailsToFirestore();
+      //   }).catchError((e){
+      //     Fluttertoast.showToast(msg: e!.message);
+      //   })
+    }
+  }
+
+  postDetailsToFirestore() async {}
 }

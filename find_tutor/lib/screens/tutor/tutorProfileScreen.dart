@@ -15,13 +15,21 @@ class _tutorProfileState extends State<tutorProfile> {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Container(
-          child: Center(
-            child: Text(
-              "Welcome",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+        child: Center(
+          child: Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Welcome",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
